@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -72,6 +73,41 @@ public class NoteService {
 
     public List<Note> findAll() {
         return noteRepository.findAll();
+    }
+
+    public List<Note> findAll(String sort) {
+        List<Note> notes = noteRepository.findAll();
+        return sortNotes(notes, sort);
+    }
+
+    public List<Note> search(String q, Tag tag, String sort) {
+        List<Note> notes = noteRepository.findAll();
+
+        if (q != null && !q.isBlank()) {
+            String lower = q.toLowerCase();
+            notes = notes.stream()
+                    .filter(n -> n.getTitle().toLowerCase().contains(lower)
+                            || n.getContent().toLowerCase().contains(lower))
+                    .toList();
+        }
+
+        if (tag != null) {
+            notes = notes.stream()
+                    .filter(n -> n.getTags() != null && n.getTags().contains(tag))
+                    .toList();
+        }
+
+        return sortNotes(notes, sort);
+    }
+
+    private List<Note> sortNotes(List<Note> notes, String sort) {
+        if (sort == null) return notes;
+        Comparator<Note> comparator = switch (sort) {
+            case "title" -> Comparator.comparing(Note::getTitle, Comparator.nullsLast(String::compareToIgnoreCase));
+            case "updatedAt" -> Comparator.comparing(Note::getUpdateDate, Comparator.nullsLast(Comparator.naturalOrder()));
+            default -> Comparator.comparing(Note::getCreationDate, Comparator.nullsLast(Comparator.naturalOrder()));
+        };
+        return notes.stream().sorted(comparator).toList();
     }
 
     public Note findById(String id) {
