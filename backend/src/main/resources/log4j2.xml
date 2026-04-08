@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+    <!-- ========================= -->
+    <!--        APPENDERS          -->
+    <!-- ========================= -->
+    <Appenders>
+
+        <!-- Console Logging -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <!-- Rolling File Logging -->
+        <RollingFile name="FileLogger"
+                     fileName="backend/logs/app.log"
+                     filePattern="logs/app-%d{yyyy-MM-dd}-%i.log.gz">
+
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+
+            <Policies>
+                <!-- Neue Datei jeden Tag -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <!-- Neue Datei ab 10 MB -->
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+
+    </Appenders>
+
+    <!-- ========================= -->
+    <!--         LOGGERS           -->
+    <!-- ========================= -->
+    <Loggers>
+
+        <!-- Dein Projekt-Logger -->
+        <Logger name="dev.knis.garden" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileLogger"/>
+        </Logger>
+
+        <!-- Root Logger -->
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+        </Root>
+
+    </Loggers>
+
+</Configuration>

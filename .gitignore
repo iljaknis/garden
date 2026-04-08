@@ -1,0 +1,15 @@
+# Logs
+logs/
+*.log
+
+# IDE - user specific
+.idea/workspace.xml
+.idea/inspectionProfiles/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+tomcat.*/

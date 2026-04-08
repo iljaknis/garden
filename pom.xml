@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.knis</groupId>
+    <artifactId>knis-garden</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!-- Multi-Module Packaging -->
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>backend</module>
+    </modules>
+
+    <properties>
+        <!-- Override Spring Boot BOM to use Lombok 1.18.38 which supports Java 24 -->
+        <lombok.version>1.18.38</lombok.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>3.4.4</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
