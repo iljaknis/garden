@@ -2,10 +2,20 @@
 logs/
 *.log
 
-# IDE - user specific
-.idea/workspace.xml
-.idea/inspectionProfiles/
+# IDE
+.idea/
 *.iml
+*.iws
+*.ipr
+.vscode/
+.classpath
+.factorypath
+.project
+.settings/
+
+# Maven
+.mvn/
+target/
 
 # OS
 .DS_Store
