@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -17,6 +18,9 @@ function AuthenticatedLayout() {
 }
 
 export default function App() {
+  useEffect(() => {
+    document.documentElement.classList.add("dark");
+  }, []);
   return (
     <AuthProvider>
       <BrowserRouter>
