@@ -71,7 +71,7 @@ export default function Dashboard() {
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-gray-100 text-2xl font-bold">Meine Notizen</h1>
-          <Button className="bg-sky-500/50" onClick={openCreate}>
+          <Button className="text-white hover:text-slate-900 bg-sky-500/50" onClick={openCreate}>
             <Plus className="h-4 w-4 mr-2" />
             Neue Notiz
           </Button>

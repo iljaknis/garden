@@ -20,10 +20,16 @@ export default function NavbarAlternate() {
     navigate("/login");
   }
 
+  {/*
   const linkClass = (path: string) =>
     `px-3 py-2 text-sm transition-colors ${location.pathname === path
       ? "text-cyan-400"
       : "text-slate-300 hover:text-white"
+    }`;*/}
+  const linkClass = (path: string) =>
+    `px-3 py-2 text-sm rounded-md transition-colors ${location.pathname === path
+      ? "bg-slate-800 text-white"
+      : "text-slate-300 hover:text-white hover:bg-slate-800/60"
     }`;
 
   return (
@@ -51,6 +57,22 @@ export default function NavbarAlternate() {
               <NavigationMenuLink asChild>
                 <Link to="/dashboard" className={linkClass("/dashboard")}>
                   Dashboard
+                </Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuLink asChild>
+                <Link to="#dummy1" className={linkClass("#dummy1")}>
+                  DummyItem
+                </Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuLink asChild>
+                <Link to="#dummy2" className={linkClass("#dummy2")}>
+                  DummyItem2
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
