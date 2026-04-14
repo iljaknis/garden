@@ -7,6 +7,9 @@ import Navbar from "./components/NavbarAlternate";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import DummyOne from "./pages/DummyOne";
+import DummyTwo from "./pages/DummyTwo";
+
 
 function AuthenticatedLayout() {
   return (
@@ -35,6 +38,8 @@ export default function App() {
             <Route element={<AuthenticatedLayout />}>
               <Route path="/" element={<Home />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/dummyone" element={<DummyOne />} />
+              <Route path="/dummytwo" element={<DummyTwo />} />
             </Route>
           </Route>
         </Routes>

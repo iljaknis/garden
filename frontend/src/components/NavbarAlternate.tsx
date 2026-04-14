@@ -63,16 +63,16 @@ export default function NavbarAlternate() {
 
             <NavigationMenuItem>
               <NavigationMenuLink asChild>
-                <Link to="#dummy1" className={linkClass("#dummy1")}>
-                  DummyItem
+                <Link to="/dummyone" className={linkClass("/dummyone")}>
+                  DummyOne
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
 
             <NavigationMenuItem>
               <NavigationMenuLink asChild>
-                <Link to="#dummy2" className={linkClass("#dummy2")}>
-                  DummyItem2
+                <Link to="/dummytwo" className={linkClass("/dummytwo")}>
+                  DummyTwo
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
