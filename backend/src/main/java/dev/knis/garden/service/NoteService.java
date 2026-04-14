@@ -62,8 +62,7 @@ public class NoteService {
         }
 
         if (req.getTags() != null) {
-            note.getTags().clear();
-            note.getTags().addAll(req.getTags());
+            note.setTags(req.getTags());
         }
         note.setUpdateDate();
         noteRepository.save(note);
@@ -86,8 +85,9 @@ public class NoteService {
         if (q != null && !q.isBlank()) {
             String lower = q.toLowerCase();
             notes = notes.stream()
-                    .filter(n -> n.getTitle().toLowerCase().contains(lower)
-                            || n.getContent().toLowerCase().contains(lower))
+                    .filter(n -> 
+                        containsIgnoreCase(n.getTitle(), lower) ||
+                        containsIgnoreCase(n.getContent(), lower))
                     .toList();
         }
 
@@ -134,20 +134,24 @@ public class NoteService {
 
     public List<Note> findAllByTitle(String title) {
         return noteRepository.findAll().stream()
-                .filter(n -> n.getTitle().equals(title))
+                .filter(n -> n.getTitle() != null && n.getTitle().equals(title))
                 .toList();
     }
 
     public List<Note> findAllByTitleContains(String title){
         return noteRepository.findAll().stream()
-                .filter(n -> n.getTitle().contains(title))
+                .filter(n -> n.getTitle() != null && n.getTitle().contains(title))
                 .toList();
     }
 
     public List<Note> findAllByContentContains(String content) {
         return noteRepository.findAll().stream()
-                .filter(n -> n.getContent().contains(content))
+                .filter(n -> n.getContent() != null && n.getContent().contains(content))
                 .toList();
+    }
+    
+    private boolean containsIgnoreCase(String source, String query) {
+        return source != null && source.toLowerCase().contains(query);
     }
 
 }

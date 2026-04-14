@@ -22,7 +22,7 @@ public class NoteController {
 
     @GetMapping
     public ResponseEntity<List<NoteResponse>> getAllNotes(
-            @RequestParam(required = false) String sort) {
+            @RequestParam(name = "sort", required = false) String sort) {
         return ResponseEntity.ok(
                 noteService.findAll(sort).stream().map(NoteResponse::from).toList()
         );
@@ -30,9 +30,9 @@ public class NoteController {
 
     @GetMapping("/search")
     public ResponseEntity<List<NoteResponse>> searchNotes(
-            @RequestParam(required = false) String q,
-            @RequestParam(required = false) Tag tag,
-            @RequestParam(required = false) String sort) {
+            @RequestParam(name = "q" , required = false) String q,
+            @RequestParam(name = "tag", required = false) Tag tag,
+            @RequestParam(name = "sort", required = false) String sort) {
         return ResponseEntity.ok(
                 noteService.search(q, tag, sort).stream().map(NoteResponse::from).toList()
         );

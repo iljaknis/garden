@@ -1,16 +1,18 @@
 package dev.knis.garden.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import dev.knis.garden.util.IdGenerator;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Note {
 
     @Getter
-    private final String id = IdGenerator.generateId();
+    private String id;
 
     @Getter
     @Setter
@@ -21,19 +23,26 @@ public class Note {
     private String content;
 
     @Getter
-    private final LocalDateTime creationDate;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime creationDate;
 
     @Getter
     @Setter
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime updateDate;
 
     @Getter
+    @Setter
     private List<Tag> tags;
 
+    // Default Contructor
+    public Note(){}
+
     public Note(String title, String content, List<Tag> tags) {
+        this.id = IdGenerator.generateId();
         this.title = title;
         this.content = content;
-        this.tags = tags;
+        this.tags = tags != null ? tags : new ArrayList<>();
         this.creationDate = LocalDateTime.now();
     }
 
@@ -52,6 +61,4 @@ public class Note {
                 ", updatedAt=" + updateDate +
                 '}';
     }
-
-
 }
