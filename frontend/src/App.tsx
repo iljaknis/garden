@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+// @ts-ignore
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";

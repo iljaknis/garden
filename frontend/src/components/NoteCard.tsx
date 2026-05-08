@@ -1,6 +1,17 @@
 import type { Note } from "../services/api";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "./ui/card";
 import { Button } from "./ui/button";
+import {
+    AlertDialog,
+    AlertDialogTrigger,
+    AlertDialogContent,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogCancel,
+    AlertDialogAction,
+} from "./ui/alert-dialog";
 import { Pencil, Trash2 } from "lucide-react";
 
 interface NoteCardProps {
@@ -35,14 +46,35 @@ export default function NoteCard({ note, onEdit, onDelete }: NoteCardProps) {
                         >
                             <Pencil className="h-4 w-4" />
                         </Button>
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-8 w-8 text-destructive hover:text-destructive"
-                            onClick={() => onDelete(note.id)}
-                        >
-                            <Trash2 className="h-4 w-4" />
-                        </Button>
+                        <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="h-8 w-8 text-destructive hover:text-destructive"
+                                >
+                                    <Trash2 className="h-4 w-4" />
+                                </Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                                <AlertDialogHeader>
+                                    <AlertDialogTitle>Notiz löschen?</AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                        Diese Aktion kann nicht rückgängig gemacht werden.
+                                        Die Notiz wird dauerhaft gelöscht.
+                                    </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                    <AlertDialogCancel>Abbrechen</AlertDialogCancel>
+                                    <AlertDialogAction
+                                        className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                                        onClick={() => onDelete(note.id)}
+                                    >
+                                        Löschen
+                                    </AlertDialogAction>
+                                </AlertDialogFooter>
+                            </AlertDialogContent>
+                        </AlertDialog>
                     </div>
                 </div>
                 {note.tags.length > 0 && (

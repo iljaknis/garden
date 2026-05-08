@@ -37,9 +37,9 @@ export default function NavbarAlternate() {
       <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
 
         {/* Logo */}
-        <Link to="/" className="text-lg font-semibold tracking-tight text-slate-100">
-          Knis Garden
-        </Link>
+        <div className="text-lg font-semibold tracking-tight text-slate-100">
+          knis.dev
+        </div>
 
         {/* Navigation */}
         <NavigationMenu>
